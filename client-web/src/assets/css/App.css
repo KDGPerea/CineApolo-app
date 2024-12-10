@@ -672,3 +672,94 @@ footer .container{
 #reserva p{
     font-size: 15px;
 }
+
+.seats-layout {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.seat {
+    padding: 10px;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
+.seat.selected {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Admin Reservas Styles */
+#admin-reservas {
+    padding: 40px 0;
+}
+
+#admin-reservas h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.busqueda-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.busqueda-container select,
+.busqueda-container input {
+    padding: 10px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.busqueda-container input {
+    width: 200px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.admin-table th, .admin-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.admin-table th {
+    background-color: #4CAF50;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.admin-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.admin-table tr:hover {
+    background-color: #ddd;
+}
+
+.admin-table td {
+    text-align: center;
+}
+
+.admin-table button {
+    padding: 5px 10px;
+    color: white;
+    background-color: #f44336;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.admin-table button:hover {
+    background-color: #d32f2f;
+}

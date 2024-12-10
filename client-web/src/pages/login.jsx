@@ -2,29 +2,26 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import '../assets/css/App.css';
-import Header from '../components/header'
-
+import Header from '../components/Header'
 
 function Login() {
-
   const [formData, setFormData] = useState({ 
     email: '', 
     password: ''
-  })
+  });
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
-    setFormData({...formData, [name]: value});
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
-    try{
-
+    try {
       console.log('Datos enviados:', formData);
 
       const response = await fetch('http://localhost:4000/login', {
@@ -37,16 +34,26 @@ function Login() {
 
       const data = await response.json();
 
-      if (response.ok){
+      if (response.ok) {
         localStorage.setItem('token', data.token);
-        localStorage.setItem('user', JSON.stringify({ id: data.id, nombre: data.nombre}));
-        alert('Inicio de sesión exitoso')
-        navigate('/');
-      } else{
+        localStorage.setItem('user', JSON.stringify({ id: data.id, nombre: data.nombre, rol: data.rol }));
+        alert('Inicio de sesión exitoso');
+
+        const tokenPayload = JSON.parse(atob(data.token.split('.')[1]));
+        console.log('Token Payload:', tokenPayload);  // Verifica el contenido del token
+
+        if (tokenPayload.rol === 'admin') {
+          console.log('Usuario es admin, redirigiendo a /admin/reservas');
+          navigate('/admin/reservas');
+        } else {
+          console.log('Usuario no es admin, redirigiendo a /');
+          navigate('/');
+        }
+      } else {
         setError(data.message || 'Error en el inicio de sesión');
       }
-    } catch (error){
-      console.error('Error:', error)
+    } catch (error) {
+      console.error('Error:', error);
       setError('Error en el servidor. Inténtalo de nuevo más tarde.');
     }
   }
