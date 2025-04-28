@@ -24,7 +24,7 @@ app.listen(port,(error)=>{
 const pool = new postgresPool({
     host: 'localhost',
     user: 'postgres',
-    password: 'kevin3146477564',
+    password: '',
     database: 'db_apolo',
     port: 5432,
     max: 10,
